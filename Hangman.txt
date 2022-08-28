@@ -1,0 +1,72 @@
+//Written by Imran Ali
+//6/4/2022
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Practice
+{
+    internal class Program
+    {
+    
+        static void Main(string[] args)
+        {
+            Hangman game1 = new Hangman();
+            game1.guess();
+            
+        }
+    }   
+
+}
+
+public class Hangman
+{
+    public string guessedLetter;
+    public int remaining = 8;
+    public List<string> question = new List<string> { "B", "A", "R", "N" };
+    public List<string> answerList = new List<string> { "_ ", "_ ", "_ ", "_ "};
+
+    public void update()
+    {
+        if (question.Contains(guessedLetter))
+        {
+            answerList[question.IndexOf(guessedLetter)] = guessedLetter + " ";
+            Console.Write("Word: ");
+            foreach (string a in answerList)
+            {
+                Console.Write(a);
+            }
+            Console.Write("Remaining: | " + remaining + " ");
+            Console.Write("Incorrect: | ");
+            Console.Write("Guess: ");
+        }
+        else
+        {
+            remaining -= 1;
+            Console.Write("Word: ");
+            foreach (string a in answerList)
+            {
+                Console.Write(a);
+            }
+            Console.Write("Remaining: | " + remaining + " ");
+            Console.Write("Incorrect: | " + guessedLetter + " ");
+            Console.Write("Guess: ");
+        }
+        
+
+    }
+    public void guess()
+    {
+        while(remaining > 0)
+        {
+            update();
+            guessedLetter = Console.ReadLine();
+        }
+        
+    }
+
+}
